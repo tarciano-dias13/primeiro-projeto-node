@@ -1,19 +1,18 @@
-import { uuid } from 'uuidv4';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-//Entidades sao declaradas com classes
+@Entity('appointments')
+//Entidades sao declaradas como classes
 class Appointment {
-    id: string;
 
+    //decorator para transformar a propriedade da classe em uma coluna de identificado unico da tabela
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+    //decorator para transformar a propriedade da classe em coluna o parametro indica o tipo do param (string as default)
+    @Column()
     provider: string;
 
+    @Column('timestamp with time zone')
     date: Date;
 
-    //Quando uma nova instacia e criada o construtor recebe os atributos desestruturados da classe
-   // e o metodo Omit do TS tipa com o primeiro parametro e "remove" o id dos pametros
-    constructor({ provider, date }: Omit<Appointment, 'id'>) {
-        this.id = uuid();
-        this.provider = provider;
-        this.date = date
-    }
 }
 export default Appointment;
