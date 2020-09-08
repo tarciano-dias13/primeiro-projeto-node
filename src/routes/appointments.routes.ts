@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { parseISO, parse } from 'date-fns';
+import { parseISO } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 import AppointmentsRepository from '../Repositories/AppointmentsRepository';
 import CreateAppointmentService from '../services/CreateAppointmentService';
@@ -18,13 +18,13 @@ appointmentsRouter.get('/', async (request, response) => {
 appointmentsRouter.post('/', async (request, response) => {
 
     try {
-        const { provider, date } = request.body;
+        const { provider_id, date } = request.body;
         //converte a data enviada para o formato do Date() do JS e modifica para horas exatas ex 1:00:00
         const parsedDate = parseISO(date);
 
         const createAppointment = new CreateAppointmentService();
 
-        const appointment = await createAppointment.execute({ date: parsedDate, provider })
+        const appointment = await createAppointment.execute({ date: parsedDate, provider_id })
         return response.json(appointment);
 
     } catch (error) {
