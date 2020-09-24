@@ -9,11 +9,11 @@ sessionRouter.post('/', async (request, response) => {
 
         const authUserService = new AuthUserService();
 
-        const { user } = await authUserService.execute({ email, password });
+        const { user, token } = await authUserService.execute({ email, password });
 
         delete user.password;
 
-        return response.send({ user })
+        return response.send({ user, token })
     } catch (error) {
         return response.status(400).json({ message: error.message });
     }
