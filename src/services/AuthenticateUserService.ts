@@ -3,6 +3,7 @@ import { compare } from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
 import authConfig from '../config/auth';
 import Users from '../models/Users'
+import AppError from '../errors/AppError';
 
 interface Request {
     email: string;
@@ -23,13 +24,13 @@ class AuthenticateUserService {
         const user = await userRepository.findOne({ where: { email } })
 
         if (!user) {
-            throw new Error('Incorrect user/password combination')
+            throw new AppError('Incorrect user/password combination')
         }
         //Se encontrar o email compara a senha digitada com a senha(criptografada) do objeto user encontrado
         const passwordMatched = await compare(password, user.password);
 
         if (!passwordMatched) {
-            throw new Error('Incorrect user/password combination');
+            throw new AppError('Incorrect user/password combination');
         }
 
         const { secret, expiresIn } = authConfig.jwt;

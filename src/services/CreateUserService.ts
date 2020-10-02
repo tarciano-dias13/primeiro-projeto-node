@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 import User from '../models/Users';
-
+import AppError from '../errors/AppError';
 interface Request {
     name: string;
     email: string;
@@ -20,7 +20,7 @@ class CreateUserService {
 
         //verifica a variavel e dispara novo erro
         if (checkUserExist) {
-            throw new Error('Email adress already used.');
+            throw new AppError('Email adress already used.');
         };
 
         //criptografa a senha do usuario com a lib bcryptjs
