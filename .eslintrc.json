@@ -23,6 +23,10 @@
         "prettier"
     ],
     "rules": {
+        //regra para nao acusar erro em variaveis nao utilizadas
+        "@typescript-eslint/no-unused-vars":["error",{
+            "argsIgnorePattern":"_"
+        }],
         "import/extensions": [
             "error",
             "ignorePackages",
