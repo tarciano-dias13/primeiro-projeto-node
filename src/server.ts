@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+import cors from 'cors';
 
 import routes from './routes';
 import './database';
@@ -8,6 +9,7 @@ import UploadConfig from './config/upload';
 
 const app = express();
 
+app.use(cors()); //habilitando o cross-platform
 app.use('/files', express.static(UploadConfig.directory));
 app.use(express.json());
 app.use(routes);
