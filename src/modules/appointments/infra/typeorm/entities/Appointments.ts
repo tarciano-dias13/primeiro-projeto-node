@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import Users from './Users';
+import Users from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('appointments')
 //Entidades sao declaradas como classes

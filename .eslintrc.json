@@ -1,45 +1,58 @@
 {
-    "env": {
-        "es6": true,
-        "node": true
-    },
-    "extends": [
-        "airbnb-base",
-        "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint",
-        "plugin:prettier/recommended"
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint",
-        "prettier"
-    ],
-    "rules": {
-        //regra para nao acusar erro em variaveis nao utilizadas
-        "@typescript-eslint/no-unused-vars":["error",{
-            "argsIgnorePattern":"_"
-        }],
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-              "ts": "never"
+	"env": {
+		"es6": true,
+		"node": true
+	},
+	"extends": [
+		"airbnb-base",
+		"plugin:@typescript-eslint/recommended",
+		"prettier/@typescript-eslint",
+		"plugin:prettier/recommended"
+	],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"@typescript-eslint",
+		"prettier"
+	],
+	"rules": {
+		//regra para nao acusar erro em variaveis nao utilizadas
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "_"
+			}
+		],
+		"@typescript-eslint/naming-convention": [
+			"error",
+			{
+				"selector": "interface",
+				"prefix": ["I"],
+				"format": ["PascalCase"]
             }
-          ],
-          "prettier/prettier": "error",
-          "class-methods-use-this":"off"
-    },
-    "settings": {
-        "import/resolver": {
-          "typescript": {}
-        }
-      }
+		],
+		"import/extensions": [
+			"error",
+			"ignorePackages",
+			{
+				"ts": "never"
+			}
+		],
+        //regra para não acusar erro ao utilizar hack do ts ao usar contrutor para criar variavel
+        "no-useless-constructor":"off",
+		"prettier/prettier": "error",
+		"class-methods-use-this": "off"
+	},
+	"settings": {
+		"import/resolver": {
+			"typescript": {}
+		}
+	}
 }
