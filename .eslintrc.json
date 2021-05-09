@@ -23,7 +23,7 @@
 		"prettier"
 	],
 	"rules": {
-		//regra para nao acusar erro em variaveis nao utilizadas
+		// regra para nao acusar erro em variaveis nao utilizadas
 		"@typescript-eslint/no-unused-vars": [
 			"error",
 			{
@@ -45,7 +45,7 @@
 				"ts": "never"
 			}
 		],
-        //regra para não acusar erro ao utilizar hack do ts ao usar contrutor para criar variavel
+        // regra para não acusar erro ao utilizar hack do ts ao usar contrutor para criar variavel
         "no-useless-constructor":"off",
 		"prettier/prettier": "error",
 		"class-methods-use-this": "off"

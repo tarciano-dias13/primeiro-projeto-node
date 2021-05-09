@@ -3,9 +3,12 @@ import 'express-async-errors';
 import cors from 'cors';
 
 import routes from '@shared/infra/http/routes';
-import '@shared/infra/typeorm';
 import AppError from '@shared/errors/AppError';
 import UploadConfig from '@config/upload';
+
+import "reflect-metadata";
+import '@shared/infra/typeorm';
+import '@shared/container';
 
 const app = express();
 
@@ -30,15 +33,15 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
         }
 
         // caso contrário, exibe o erro no log para debug
-    console.log(err);
+        console.log(err);
 
-    // Retorna mensagem padrão de erro interno (erro que não é esperado/mapeado)
-    return response.status(500).json({
-        status: 'error',
-        message: 'Internal server error',
-    });
-
-});
+        // Retorna mensagem padrão de erro interno (erro que não é esperado/mapeado)
+        return response.status(500).json({
+            status: 'error',
+            message: 'Internal server error',
+        });
+    },
+);
 
 app.listen(3333, () => {
     console.log('App running on port 3333');

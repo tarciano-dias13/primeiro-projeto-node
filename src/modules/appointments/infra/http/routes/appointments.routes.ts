@@ -1,15 +1,16 @@
+import "reflect-metadata";
 import { Router } from 'express';
-import { parseISO } from 'date-fns';
-import AppointmentsRepository from '@modules/appointments/repositories/AppointmentsRepository';
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
+
+import AppointmentsController from '../constrollers/AppointmentsConstroller';
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 const appointmentsRouter = Router();
+const appointmentController = new AppointmentsController();
 
-//injetando o middleware em todas as rotas appointments
+// injetando o middleware em todas as rotas appointments
 appointmentsRouter.use(ensureAuthenticated);
 
-//Rota: Receber a requisiçao, chamar outro arquivo, devolver uma resposta
+// Rota: Receber a requisiçao, chamar outro arquivo, devolver uma resposta
 /* appointmentsRouter.get('/', async (request, response) => {
 
     const appointmentRepository = getCustomRepository(AppointmentsRepository);
@@ -18,17 +19,6 @@ appointmentsRouter.use(ensureAuthenticated);
     return response.status(200).json(appointments);
 }) */
 
-appointmentsRouter.post('/', async (request, response) => {
-    const appointmentRepository = new AppointmentsRepository();
-    const { provider_id, date } = request.body;
-    //converte a data enviada para o formato do Date() do JS e modifica para horas exatas ex 1:00:00
-    const parsedDate = parseISO(date);
-
-    const createAppointment = new CreateAppointmentService(appointmentRepository);
-
-    const appointment = await createAppointment.execute({ date: parsedDate, provider_id })
-    return response.json(appointment);
-
-})
+appointmentsRouter.post('/', appointmentController.create);
 
 export default appointmentsRouter;
